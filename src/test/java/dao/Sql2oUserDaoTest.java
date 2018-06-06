@@ -4,6 +4,8 @@ import org.junit.*;
 import models.User;
 import org.sql2o.*;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class Sql2oUserDaoTest {
@@ -45,13 +47,34 @@ public class Sql2oUserDaoTest {
 
     @Test
     public void findById() {
+        User user = new User("matt");
+        userDao.add(user);
+        User foundUser = userDao.findById(user.getId());
+        assertEquals(user, foundUser);
     }
 
     @Test
     public void update() {
+        User user = new User("matt");
+        userDao.add(user);
+        int id = user.getId();
+        userDao.update(id, "Garnett");
+        User updatedUser = userDao.findById(id);
+        assertEquals("Garnett", updatedUser.getName());
     }
 
     @Test
     public void deleteById() {
+        User user = new User("matt");
+        User user2 = new User("bob");
+        User user3 = new User("ashley");
+        userDao.add(user);
+        userDao.add(user2);
+        userDao.add(user3);
+        userDao.deleteById(2);
+        List<User> allUsers = userDao.getAll();
+        assertEquals(2, userDao.getAll().size());
+        assertTrue( allUsers.contains(user));
+        assertTrue( allUsers.contains(user3));
     }
 }

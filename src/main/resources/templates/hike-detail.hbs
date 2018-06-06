@@ -1,0 +1,32 @@
+{{#partial "content"}}
+    <p> <strong>Name:</strong> {{hike.name}}</p>
+    <p><strong>Length:</strong> {{hike.length}} meters</p>
+    <p><strong>Elevation Gain:</strong> {{hike.elevationGain}} meters</p>
+    <p><strong>State:</strong> {{hike.state}}</p>
+    <img src="{{hike.imageUrl}}" width="70%">
+
+
+    <br>
+    <br>
+    <a href="/hikes/{{hike.id}}/edit">Edit this hike</a>
+    <br>
+    <a href="/hikes/{{hike.id}}/delete">Delete this hike</a>
+
+
+    <h3>Leave a comment</h3>
+    <form action="/hikes/{{hike.id}}/comments" method="post">
+        <label for="content"></label>
+        <input id="content" name="content" type="text" width="100%">
+        <br>
+        <br>
+        <button type="submit" class="btn btn-danger">Leave Comment</button>
+    </form>
+    {{#each comments}}
+        <!--<p>{{name}}</p>-->
+        <p>{{content}}</p>
+        <br>
+    {{/each}}
+
+{{/partial}}
+
+{{> layout.hbs}}

@@ -1,0 +1,57 @@
+{{#partial "content"}}
+    {{#if editHike}}
+        <h1>Edit this hike</h1>
+        <form action="/hikes/{{hike.id}}" method="post">
+            <br>
+            <label for="name">Name</label>
+            <br>
+            <input id="name" name="name" type="text" value="{{hike.name}}">
+            <br>
+            <label for="length">Length</label>
+            <br>
+            <input id="length" name="length" type="number" value="{{hike.length}}">
+            <br>
+            <label for="elevationGain">Elevation Gain</label>
+            <br>
+            <input id="elevationGain" name="elevationGain" type="number" value="{{hike.elevationGain}}">
+            <br>
+            <label for="state">State</label>
+            <br>
+            <input id="state" name="state" type="text" value="{{hike.state}}">
+            <br>
+            <label for="imageUrl">Image URL</label>
+            <br>
+            <input id="imageUrl" name="imageUrl" type="text" value="{{hike.imageUrl}}">
+            <br><br>
+            <button type="submit" class="btn btn-danger">Edit!</button>
+        </form>
+    {{else}}
+        <h2>Add a new hike</h2>
+        <form action="/hikes" method="post">
+            <br>
+            <label for="name">Name</label>
+            <br>
+            <input id="name" name="name" type="text">
+            <br>
+            <label for="length">Length</label>
+            <br>
+            <input id="length" name="length" type="number">
+            <br>
+            <label for="elevationGain">Elevation Gain</label>
+            <br>
+            <input id="elevationGain" name="elevationGain" type="number">
+            <br>
+            <label for="state">State</label>
+            <br>
+            <input id="state" name="state" type="text">
+            <br>
+            <label for="imageUrl">Image URL</label>
+            <br>
+            <input id="imageUrl" name="imageUrl" type="text">
+            <br><br>
+            <button type="submit" class="btn btn-success">Add Highke</button>
+        </form>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

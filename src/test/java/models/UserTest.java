@@ -21,15 +21,15 @@ public class UserTest {
         assertEquals("Brett", user.getName());
     }
 
-    @Test
-    public void getCompletedHikes() {
-        User user = new User("matt");
-        ArrayList<Hike> completeHikes = new ArrayList<>();
-        Hike hike1 = new Hike("Devil's Hike", 2000, 222,"Oregon", "www.google.com");
-        Hike hike2 = new Hike("Devil's Hike", 2000, 222,"Oregon", "www.google.com");
-        completeHikes.add(hike1);
-        completeHikes.add(hike2);
-        user.setCompletedHikes(completeHikes);
-        assertEquals(2, user.getCompletedHikes().size());
-    }
+//    @Test
+//    public void getCompletedHikes() {
+//        User user = new User("matt");
+//        ArrayList<Hike> completeHikes = new ArrayList<>();
+//        Hike hike1 = new Hike("Devil's Hike", 2000, 222,"Oregon", "www.google.com");
+//        Hike hike2 = new Hike("Devil's Hike", 2000, 222,"Oregon", "www.google.com");
+//        completeHikes.add(hike1);
+//        completeHikes.add(hike2);
+//        user.setCompletedHikes(completeHikes);
+//        assertEquals(2, user.getCompletedHikes().size());
+//    }
 }

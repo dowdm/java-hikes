@@ -1,0 +1,12 @@
+{{#partial "content"}}
+    <h1>All Highkes</h1>
+    {{#if hikes}}
+        {{#each hikes}}
+            <p><a href="/hikes/{{id}}">{{name}}, {{state}}</a></p>
+        {{/each}}
+    {{else}}
+    <h3>There are no highkes yet. Did you get so high you forgot about your legs? </h3>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

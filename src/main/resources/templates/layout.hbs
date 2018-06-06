@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{#block "title"}}High-kers{{/block}}</title>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    </head>
+    <body>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/hikes/new">Add a new hike</a></li>
+        <li role="presentation"><a href="/users/new">Make an Account</a></li>
+    </ul>
+    <div class="container">
+        <div class="page-header">
+            <img src="/images/highker.jpg" alt="highker">
+            <h1>Welcome to High-kers</h1>
+        </div>
+
+        <div class="col-md-12">
+            {{#block "content"}}
+
+            {{/block}}
+
+        </div>
+
+    </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>

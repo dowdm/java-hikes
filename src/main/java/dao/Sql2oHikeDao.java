@@ -7,10 +7,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Sql2oHikeDao implements HikeDao{
     private final Sql2o sql2o;
@@ -90,7 +87,7 @@ public class Sql2oHikeDao implements HikeDao{
 
     @Override
     public Map<Comment, String> getAllCommentsWithAuthorsByHike(int hikeId) {
-        Map<Comment, String> commentsWithAuthors = new HashMap<Comment, String>();
+        Map<Comment, String> commentsWithAuthors = new LinkedHashMap<Comment, String>();
         try (Connection con = sql2o.open()) {
             List<Comment> comments = con.createQuery("SELECT * FROM comments WHERE hikeId = :hikeId")
                     .addParameter("hikeId", hikeId)

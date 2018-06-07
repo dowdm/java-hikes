@@ -65,6 +65,8 @@ public class App {
             model.put("comments", allCommentsByHike);
             List<User> allUsers = userDao.getAll();
             model.put("users", allUsers);
+            Map<Comment, String> commentsWith = hikeDao.getAllCommentsWithAuthorsByHike(idOfHikeToFind);
+            model.put("commentsWith", commentsWith);
             return new ModelAndView(model, "hike-detail.hbs");
         }, new HandlebarsTemplateEngine());
 

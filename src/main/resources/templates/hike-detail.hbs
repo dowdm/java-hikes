@@ -31,11 +31,11 @@
         <button type="submit" class="btn btn-danger">Leave Comment</button>
     </form>
     <br>
-    {{#each comments}}
+    {{#each commentsWith}}
 
-        <p>{{userId}}</p>
+        <p>{{this}}</p>
 
-        <p>{{content}}</p>
+        <p>{{@key.content}}</p>
         <br>
     {{/each}}
 

@@ -28,53 +28,53 @@ public class Sql2oUserDaoTest {
     }
 
 
-    @Test
-    public void add() {
-        User user = new User("Matt");
-        int originalUserId = user.getId();
-        userDao.add(user);
-        assertNotEquals(originalUserId, user.getId());
-    }
-
-    @Test
-    public void getAll() {
-        User user1 = new User("Matt");
-        User user2 = new User("Garnett");
-        userDao.add(user1);
-        userDao.add(user2);
-        assertEquals(2, userDao.getAll().size());
-    }
-
-    @Test
-    public void findById() {
-        User user = new User("matt");
-        userDao.add(user);
-        User foundUser = userDao.findById(user.getId());
-        assertEquals(user, foundUser);
-    }
-
-    @Test
-    public void update() {
-        User user = new User("matt");
-        userDao.add(user);
-        int id = user.getId();
-        userDao.update(id, "Garnett");
-        User updatedUser = userDao.findById(id);
-        assertEquals("Garnett", updatedUser.getName());
-    }
-
-    @Test
-    public void deleteById() {
-        User user = new User("matt");
-        User user2 = new User("bob");
-        User user3 = new User("ashley");
-        userDao.add(user);
-        userDao.add(user2);
-        userDao.add(user3);
-        userDao.deleteById(2);
-        List<User> allUsers = userDao.getAll();
-        assertEquals(2, userDao.getAll().size());
-        assertTrue( allUsers.contains(user));
-        assertTrue( allUsers.contains(user3));
-    }
+//    @Test
+//    public void add() {
+//        User user = new User("Matt");
+//        int originalUserId = user.getId();
+//        userDao.add(user);
+//        assertNotEquals(originalUserId, user.getId());
+//    }
+//
+//    @Test
+//    public void getAll() {
+//        User user1 = new User("Matt");
+//        User user2 = new User("Garnett");
+//        userDao.add(user1);
+//        userDao.add(user2);
+//        assertEquals(2, userDao.getAll().size());
+//    }
+//
+//    @Test
+//    public void findById() {
+//        User user = new User("matt");
+//        userDao.add(user);
+//        User foundUser = userDao.findById(user.getId());
+//        assertEquals(user, foundUser);
+//    }
+//
+//    @Test
+//    public void update() {
+//        User user = new User("matt");
+//        userDao.add(user);
+//        int id = user.getId();
+//        userDao.update(id, "Garnett");
+//        User updatedUser = userDao.findById(id);
+//        assertEquals("Garnett", updatedUser.getName());
+//    }
+//
+//    @Test
+//    public void deleteById() {
+//        User user = new User("matt");
+//        User user2 = new User("bob");
+//        User user3 = new User("ashley");
+//        userDao.add(user);
+//        userDao.add(user2);
+//        userDao.add(user3);
+//        userDao.deleteById(2);
+//        List<User> allUsers = userDao.getAll();
+//        assertEquals(2, userDao.getAll().size());
+//        assertTrue( allUsers.contains(user));
+//        assertTrue( allUsers.contains(user3));
+//    }
 }

@@ -61,8 +61,8 @@ public class App {
             int idOfHikeToFind = Integer.parseInt(request.params("id"));
             Hike foundHike = hikeDao.findById(idOfHikeToFind);
             model.put("hike", foundHike);
-            List<Comment> allCommentsByHikes = hikeDao.getAllCommentsByHike(idOfHikeToFind);
-            model.put("comments", allCommentsByHikes);
+            List<Comment> allCommentsByHike = hikeDao.getAllCommentsByHike(idOfHikeToFind);
+            model.put("comments", allCommentsByHike);
             List<User> allUsers = userDao.getAll();
             model.put("users", allUsers);
             return new ModelAndView(model, "hike-detail.hbs");

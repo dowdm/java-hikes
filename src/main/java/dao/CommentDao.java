@@ -23,5 +23,4 @@ public interface CommentDao {
     void deleteById(int id);
     void clearAllComments();
 
-    User getUser(int userId);
 }

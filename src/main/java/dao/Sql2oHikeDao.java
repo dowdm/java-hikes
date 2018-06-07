@@ -2,11 +2,15 @@ package dao;
 
 import models.Comment;
 import models.Hike;
+import models.User;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Sql2oHikeDao implements HikeDao{
     private final Sql2o sql2o;
@@ -82,6 +86,23 @@ public class Sql2oHikeDao implements HikeDao{
                     .addParameter("hikeId", hikeId)
                     .executeAndFetch(Comment.class);
         }
+    }
+
+    @Override
+    public Map<Comment, String> getAllCommentsWithAuthorsByHike(int hikeId) {
+        Map<Comment, String> commentsWithAuthors = new HashMap<Comment, String>();
+        try (Connection con = sql2o.open()) {
+            List<Comment> comments = con.createQuery("SELECT * FROM comments WHERE hikeId = :hikeId")
+                    .addParameter("hikeId", hikeId)
+                    .executeAndFetch(Comment.class);
+            for (Comment comment : comments) {
+                String author = con.createQuery("SELECT name FROM users WHERE id = :userId")
+                        .addParameter("userId", comment.getUserId())
+                        .executeAndFetchFirst(String.class);
+                commentsWithAuthors.put(comment, author);
+            }
+        }
+        return commentsWithAuthors;
     }
 
 }

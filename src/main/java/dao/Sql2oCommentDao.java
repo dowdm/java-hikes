@@ -76,13 +76,5 @@ public class Sql2oCommentDao implements CommentDao{
         }
     }
 
-    @Override
-    public User getUser(int userId) {
-        try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM users WHERE id = :userId")
-                    .addParameter("id", userId)
-                    .executeAndFetchFirst(User.class);
-        }
-    }
 
 }

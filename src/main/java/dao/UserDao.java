@@ -1,5 +1,6 @@
 package dao;
 
+import models.Comment;
 import models.Hike;
 import models.User;
 
@@ -22,6 +23,6 @@ public interface UserDao {
     void deleteById(int id);
 
 
-//    List<Hike> getAllCompletedHikesByUser(int userId);
+    List<Comment> getAllCommentsByUserByHike(int userId);
     
 }

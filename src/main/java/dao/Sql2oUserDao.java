@@ -1,5 +1,6 @@
 package dao;
 
+import models.Comment;
 import models.User;
 import models.Hike;
 import org.sql2o.*;
@@ -66,6 +67,15 @@ public class Sql2oUserDao implements UserDao {
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List<Comment> getAllCommentsByUserByHike(int userId){
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM comments WHERE id = :userId")
+                    .addParameter("id", userId)
+                    .executeAndFetch(Comment.class);
         }
     }
 

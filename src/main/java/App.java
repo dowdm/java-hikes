@@ -30,7 +30,9 @@ public class App {
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Hike> allHikes = hikeDao.getAll();
+            List<User> allUsers = userDao.getAll();
             model.put("hikes", allHikes);
+            model.put("users", allUsers);
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -61,6 +63,8 @@ public class App {
             model.put("hike", foundHike);
             List<Comment> allCommentsByHikes = hikeDao.getAllCommentsByHike(idOfHikeToFind);
             model.put("comments", allCommentsByHikes);
+            List<User> allUsers = userDao.getAll();
+            model.put("users", allUsers);
             return new ModelAndView(model, "hike-detail.hbs");
         }, new HandlebarsTemplateEngine());
 
@@ -72,7 +76,7 @@ public class App {
             return new ModelAndView(model, "hike-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/hikes/:id", (request, response) -> {
+        post("/hikes/:id/edit", (request, response) -> {
             int idOfHikeToEdit = Integer.parseInt(request.params("id"));
             String name = request.queryParams("name");
             int length = Integer.parseInt(request.queryParams("length"));
@@ -80,27 +84,73 @@ public class App {
             String state = request.queryParams("state");
             String imageUrl = request.queryParams("imageUrl");
             hikeDao.update(idOfHikeToEdit, name, length, elevationGain, state, imageUrl);
-//            String content = request.queryParams("content");
-//            Comment newComment= new Comment(1,content);
-//            commentDao.add(newComment);
             response.redirect("/hikes/" + idOfHikeToEdit);
             return null;
         }, new HandlebarsTemplateEngine());
 
         post("/hikes/:id/comments", (request, response) -> {
-            int idOfHikeToEdit = Integer.parseInt(request.params("id"));
+            Map<String, Object> model = new HashMap<>();
+            int idOfHikeToFind = Integer.parseInt(request.params("id"));
             String content = request.queryParams("content");
-            Comment newComment= new Comment(1,content);
-            commentDao.add(newComment);
-            response.redirect("/hikes/" + idOfHikeToEdit);
+            int userId = Integer.parseInt(request.queryParams("userName"));
+            Comment userComment = new Comment(userId, content, idOfHikeToFind); // add dropdown of users for authentication
+            commentDao.add(userComment);
+            List<Comment> comments = hikeDao.getAllCommentsByHike(idOfHikeToFind);
+            model.put("comments", comments);
+            response.redirect("/hikes/" + idOfHikeToFind);
             return null;
         }, new HandlebarsTemplateEngine());
 
 
+        get("/users/new", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<User> users = userDao.getAll();
+            model.put("users", users);
+            return new ModelAndView(model, "user-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/users", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<User> allUsers = userDao.getAll();
+            model.put("users", allUsers);
+            String name = request.queryParams("name");
+            User newUser = new User(name);
+            userDao.add(newUser);
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
+
+        get("/users/:id", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            int idOfUserToFind = Integer.parseInt(request.params("id"));
+            User foundUser = userDao.findById(idOfUserToFind);
+            model.put("user", foundUser);
+            return new ModelAndView(model, "user-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        get("users/:id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            User user = userDao.findById(Integer.parseInt(request.params("id")));
+            model.put("user", user);
+            model.put("editUser", true);
+            return new ModelAndView(model, "user-form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        post("/users/:id", (request, response) -> {
+            String newName = request.queryParams("name");
+            int idOfUserToEdit = Integer.parseInt(request.params("id"));
+            userDao.update(idOfUserToEdit, newName);
+            response.redirect("/users/" + idOfUserToEdit);
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
-
-
+        get("/users/:id/delete", (request, response) -> {
+            int idOfUserToDelete = Integer.parseInt(request.params("id"));
+            userDao.deleteById(idOfUserToDelete);
+            response.redirect("/");
+            return null;
+        }, new HandlebarsTemplateEngine());
 
 
     }

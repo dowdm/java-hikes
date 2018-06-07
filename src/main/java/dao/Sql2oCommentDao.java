@@ -1,5 +1,6 @@
 package dao;
 
+import models.User;
 import org.sql2o.*;
 import models.Comment;
 import java.util.List;
@@ -15,10 +16,7 @@ public class Sql2oCommentDao implements CommentDao{
     public void add(Comment comment) {
         String sql = "INSERT INTO comments (content, userId, hikeId) VALUES (:content, :userId, :hikeId)";
         try(Connection con = sql2o.open()){
-            int id = (int) con.createQuery(sql, true)
-                    .bind(comment)
-                    .executeUpdate()
-                    .getKey();
+            int id = (int) con.createQuery(sql, true).bind(comment).executeUpdate().getKey();
             comment.setId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
@@ -75,6 +73,15 @@ public class Sql2oCommentDao implements CommentDao{
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
+        }
+    }
+
+    @Override
+    public User getUser(int userId) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM users WHERE id = :userId")
+                    .addParameter("id", userId)
+                    .executeAndFetchFirst(User.class);
         }
     }
 

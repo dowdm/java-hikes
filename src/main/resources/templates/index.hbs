@@ -1,12 +1,29 @@
 {{#partial "content"}}
-    <h1>All Highkes</h1>
-    {{#if hikes}}
-        {{#each hikes}}
-            <p><a href="/hikes/{{id}}">{{name}}, {{state}}</a></p>
-        {{/each}}
-    {{else}}
-    <h3>There are no highkes yet. Did you get so high you forgot about your legs? </h3>
-    {{/if}}
+    <div class="row">
+        <div class="col-md-6">
+            <h1>All Highkes</h1>
+            {{#if hikes}}
+                {{#each hikes}}
+                    <p><a href="/hikes/{{id}}">{{name}}, {{state}}</a></p>
+                {{/each}}
+            {{else}}
+                <h3>There are no highkes yet. Did you get so high you forgot about your legs? </h3>
+            {{/if}}
+        </div>
+        <div class="col-md-6">
+            <h1>All Highkers</h1>
+            {{#if users}}
+                {{#each users}}
+                    <p><a href="/users/{{id}}">{{name}}</a></p>
+                {{/each}}
+            {{else}}
+                <h4>There are currently no users signed in.</h4>
+            {{/if}}
+        </div>
+
+
+
+    </div>
 {{/partial}}
 
 {{> layout.hbs}}

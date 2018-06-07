@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Objects;
+import models.User;
 
 public class Comment {
     private int id;
@@ -9,9 +10,10 @@ public class Comment {
     private int hikeId;
 
 
-    public Comment(int userId, String content) {
+    public Comment(int userId, String content, int hikeId) {
         this.userId = userId;
         this.content = content;
+        this.hikeId = hikeId;
     }
 
     public int getId() {
@@ -40,10 +42,6 @@ public class Comment {
 
     public int getHikeId() {
         return hikeId;
-    }
-
-    public void setHikeId(int hikeId) {
-        this.hikeId = hikeId;
     }
 
 

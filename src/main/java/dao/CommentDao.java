@@ -2,6 +2,7 @@ package dao;
 
 
 import models.Comment;
+import models.User;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface CommentDao {
     void deleteById(int id);
     void clearAllComments();
 
+    User getUser(int userId);
 }

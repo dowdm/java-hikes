@@ -1,0 +1,23 @@
+{{#partial "content"}}
+    {{#if editUser}}
+        <h1>Edit user info</h1>
+        <form action="/users/{{user.id}}" method="post">
+            <label for="name">Edit username</label>
+            <br>
+            <input id="name" name="name" type="text" value="{{user.name}}">
+            <br><br>
+            <button type="submit" class="btn btn-danger">Edit</button>
+        </form>
+    {{else}}
+        <h1>Create a new Account</h1>
+        <form action="/users" method="post">
+            <label for="name">Enter username</label>
+            <br>
+            <input id="name" name="name" type="text">
+            <br><br>
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

@@ -1,6 +1,6 @@
 {{#partial "content"}}
     <p> <strong>Name:</strong> {{hike.name}}</p>
-    <p><strong>Length:</strong> {{hike.length}} meters</p>
+    <p><strong>Length:</strong> {{hike.length}} kilometers</p>
     <p><strong>Elevation Gain:</strong> {{hike.elevationGain}} meters</p>
     <p><strong>State:</strong> {{hike.state}}</p>
     <img src="{{hike.imageUrl}}" width="70%">
@@ -15,14 +15,24 @@
 
     <h3>Leave a comment</h3>
     <form action="/hikes/{{hike.id}}/comments" method="post">
-        <label for="content"></label>
+        <label for="userName">Select your username:</label>
+
+        <select name="userName" id="userName">
+        {{#each users}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+        </select>
+        <p>Not a registered user?<a href="/users/new">Sign-up here.</a></p>
+        <br>
+        <label for="content">Comment:</label>
         <input id="content" name="content" type="text" width="100%">
         <br>
         <br>
         <button type="submit" class="btn btn-danger">Leave Comment</button>
     </form>
+    <br>
     {{#each comments}}
-        <!--<p>{{name}}</p>-->
+        <p>{{user.name}}</p>
         <p>{{content}}</p>
         <br>
     {{/each}}
